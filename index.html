@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
     <title>TBC Classic Arena Points</title>
 </head>
 <body>
+<h1>TBC Classic Arena Points</h1>
 <table>
     <tr>
         <th>Team Size</th>
@@ -13,27 +16,21 @@
     </tr>
     <tr>
         <td><label for="2v2-rating">2v2</label></td>
-        <td>
-            <input id="2v2-rating" type="text">
-        </td>
+        <td><input id="2v2-rating" type="text"></td>
         <td id="2v2-points"></td>
     </tr>
     <tr>
         <td><label for="3v3-rating">3v3</label></td>
-        <td>
-            <input id="3v3-rating" type="text">
-        </td>
+        <td><input id="3v3-rating" type="text"></td>
         <td id="3v3-points"></td>
     </tr>
     <tr>
         <td><label for="5v5-rating">5v5</label></td>
-        <td>
-            <input id="5v5-rating" type="text">
-        </td>
+        <td><input id="5v5-rating" type="text"></td>
         <td id="5v5-points"></td>
     </tr>
     <tr>
-        <td><button id="submit-button" onclick="calculatePointsAndShow()">Submit</button></td>
+        <td colspan="3"><button class="submit-button" onclick="calculatePointsAndShow()">Submit</button></td>
     </tr>
 </table>
 </body>
