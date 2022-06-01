@@ -44,11 +44,11 @@
     function calculatePointsAndShow() {
         let ratingTwos = validateRating(document.getElementById("2v2-rating").value, "2s");
         if (ratingTwos !== INVALID_RATING) {
-            document.getElementById("2v2-points").innerText = formatPoints(calculatePoints(ratingTwos));
+            document.getElementById("2v2-points").innerText = formatPoints(calculatePoints(ratingTwos, 0.76));
         }
         let ratingThrees = validateRating(document.getElementById("3v3-rating").value, "3s");
         if (ratingThrees !== INVALID_RATING) {
-            document.getElementById("3v3-points").innerText = formatPoints(calculatePoints(ratingThrees));
+            document.getElementById("3v3-points").innerText = formatPoints(calculatePoints(ratingThrees, 0.88));
         }
         let ratingFives = validateRating(document.getElementById("5v5-rating").value, "5s")
         if (ratingFives !== INVALID_RATING) {
@@ -76,11 +76,11 @@
         return input.trim().length === 0;
     }
 
-    function calculatePoints(rating) {
-        return 1022 / (1 + 123 * Math.pow(2.71828, -0.00412 * rating)) + 580;
+    function calculatePoints(rating, multiplier = 1) {
+        return (1022 / (1 + 123 * Math.pow(2.71828, -0.00412 * rating)) + 580) * multiplier;
     }
 
-    function formatPoints(points, multiplier = 1) {
-        return Math.floor(points * multiplier).toString();
+    function formatPoints(points) {
+        return Math.floor(points).toString();
     }
 </script>
