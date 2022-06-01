@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TBC Classic Arena Points</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>Team Size</th>
+        <th>Rating</th>
+        <th>Points</th>
+    </tr>
+    <tr>
+        <td><label for="2v2-rating">2v2</label></td>
+        <td>
+            <input id="2v2-rating" type="text">
+        </td>
+        <td id="2v2-points"></td>
+    </tr>
+    <tr>
+        <td><label for="3v3-rating">3v3</label></td>
+        <td>
+            <input id="3v3-rating" type="text">
+        </td>
+        <td id="3v3-points"></td>
+    </tr>
+    <tr>
+        <td><label for="5v5-rating">5v5</label></td>
+        <td>
+            <input id="5v5-rating" type="text">
+        </td>
+        <td id="5v5-points"></td>
+    </tr>
+    <tr>
+        <td><button id="submit-button" onclick="calculatePointsAndShow()">Submit</button></td>
+    </tr>
+</table>
+</body>
+</html>
+<script>
+    const INVALID_RATING = -1;
+
+    function calculatePointsAndShow() {
+        let ratingTwos = validateRating(document.getElementById("2v2-rating").value, "2s");
+        if (ratingTwos !== INVALID_RATING) {
+            document.getElementById("2v2-points").innerText = formatPoints(calculatePoints(ratingTwos));
+        }
+        let ratingThrees = validateRating(document.getElementById("3v3-rating").value, "3s");
+        if (ratingThrees !== INVALID_RATING) {
+            document.getElementById("3v3-points").innerText = formatPoints(calculatePoints(ratingThrees));
+        }
+        let ratingFives = validateRating(document.getElementById("5v5-rating").value, "5s")
+        if (ratingFives !== INVALID_RATING) {
+            document.getElementById("5v5-points").innerText = formatPoints(calculatePoints(ratingFives));
+        }
+    }
+
+    function validateRating(rating, name) {
+        if (isBlank(rating)) {
+            return INVALID_RATING;
+        }
+        let ratingAsNumber = Number(rating);
+        if (!Number.isInteger(ratingAsNumber)) {
+            alert(`The ${name} rating you entered is not a whole number.`);
+            return INVALID_RATING;
+        }
+        if (ratingAsNumber < 0) {
+            alert(`The ${name} rating you entered is negative.`);
+            return INVALID_RATING;
+        }
+        return ratingAsNumber;
+    }
+
+    function isBlank(input) {
+        return input.trim().length === 0;
+    }
+
+    function calculatePoints(rating) {
+        return 1022 / (1 + 123 * Math.pow(2.71828, -0.00412 * rating)) + 580;
+    }
+
+    function formatPoints(points, multiplier = 1) {
+        return Math.floor(points * multiplier).toString();
+    }
+</script>
