@@ -60,19 +60,19 @@
     });
 
     function calculatePointsAndShow() {
-        let ratingTwos = validateRating(Data.Twos.rating(), "2s");
+        const ratingTwos = validateRating(Data.Twos.rating(), "2s");
         if (ratingTwos === INVALID_RATING) {
             Data.Twos.setPoints("");
         } else {
             Data.Twos.setPoints(formatPoints(calculatePoints(ratingTwos, 0.76)));
         }
-        let ratingThrees = validateRating(Data.Threes.rating(), "3s");
+        const ratingThrees = validateRating(Data.Threes.rating(), "3s");
         if (ratingThrees === INVALID_RATING) {
             Data.Threes.setPoints("");
         } else {
             Data.Threes.setPoints(formatPoints(calculatePoints(ratingThrees, 0.88)));
         }
-        let ratingFives = validateRating(Data.Fives.rating(), "5s");
+        const ratingFives = validateRating(Data.Fives.rating(), "5s");
         if (ratingFives === INVALID_RATING) {
             Data.Fives.setPoints("");
         } else {
@@ -84,7 +84,7 @@
         if (isBlank(rating)) {
             return INVALID_RATING;
         }
-        let ratingAsNumber = Number(rating);
+        const ratingAsNumber = Number(rating);
         if (!Number.isInteger(ratingAsNumber)) {
             alert(`The ${name} rating you entered is not a whole number.`);
             return INVALID_RATING;
