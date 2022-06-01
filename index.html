@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>TBC Classic Arena Points</h1>
-<table>
+<table id="main-table">
     <tr>
         <th>Team Size</th>
         <th>Rating</th>
@@ -38,18 +38,45 @@
 <script>
     const INVALID_RATING = -1;
 
+    const Data = {
+        Twos: {
+            rating: () => document.getElementById("2v2-rating").value,
+            setPoints: (points) => document.getElementById("2v2-points").innerText = points
+        },
+        Threes: {
+            rating: () => document.getElementById("3v3-rating").value,
+            setPoints: (points) => document.getElementById("3v3-points").innerText = points
+        },
+        Fives: {
+            rating: () => document.getElementById("5v5-rating").value,
+            setPoints: (points) => document.getElementById("5v5-points").innerText = points
+        }
+    };
+
+    document.getElementById("main-table").addEventListener("keyup", (event) => {
+        if (event.key === "Enter") {
+            calculatePointsAndShow();
+        }
+    });
+
     function calculatePointsAndShow() {
-        let ratingTwos = validateRating(document.getElementById("2v2-rating").value, "2s");
-        if (ratingTwos !== INVALID_RATING) {
-            document.getElementById("2v2-points").innerText = formatPoints(calculatePoints(ratingTwos, 0.76));
+        let ratingTwos = validateRating(Data.Twos.rating(), "2s");
+        if (ratingTwos === INVALID_RATING) {
+            Data.Twos.setPoints("");
+        } else {
+            Data.Twos.setPoints(formatPoints(calculatePoints(ratingTwos, 0.76)));
         }
-        let ratingThrees = validateRating(document.getElementById("3v3-rating").value, "3s");
-        if (ratingThrees !== INVALID_RATING) {
-            document.getElementById("3v3-points").innerText = formatPoints(calculatePoints(ratingThrees, 0.88));
+        let ratingThrees = validateRating(Data.Threes.rating(), "3s");
+        if (ratingThrees === INVALID_RATING) {
+            Data.Threes.setPoints("");
+        } else {
+            Data.Threes.setPoints(formatPoints(calculatePoints(ratingThrees, 0.88)));
         }
-        let ratingFives = validateRating(document.getElementById("5v5-rating").value, "5s")
-        if (ratingFives !== INVALID_RATING) {
-            document.getElementById("5v5-points").innerText = formatPoints(calculatePoints(ratingFives));
+        let ratingFives = validateRating(Data.Fives.rating(), "5s");
+        if (ratingFives === INVALID_RATING) {
+            Data.Fives.setPoints("");
+        } else {
+            Data.Fives.setPoints(formatPoints(calculatePoints(ratingFives)));
         }
     }
 
